@@ -40,6 +40,8 @@ The selected concept is **Data Lineage Console**: an original, permanently dark 
 4. The supplied reference website is a design-pattern reference only.
 5. Do not invent achievements, dates, certifications, clients, project links, or contact information.
 
+Direct user clarification on 2026-11-05 confirms that dbt was used in the Antern Technologies pipeline. This verified correction supplements the résumé where that tool attribution was omitted.
+
 Website copy must not reproduce résumé bullets verbatim throughout the page. Reframe supported facts into concise recruiter-friendly narratives organized around the business or research problem, Supreeth's technical contribution, the technologies used, and the measurable result, without changing the claim's meaning or strength.
 
 The repository currently contains one production file, `index.html`, with all markup, styling, content, and JavaScript inline. The tracked `Supreeth_2.pdf` is deleted in the working tree. The newer résumé exists as DOCX outside the repository. The implementation must not overwrite or disguise this state: it will package the newer résumé as the download asset unless a matching current PDF becomes available.
@@ -108,7 +110,7 @@ Present roles in reverse chronology with a continuous lineage rail and expandabl
 
 **Antern Technologies — Data Engineering Intern, May 2025–Aug 2025**
 
-- End-to-end AWS pipeline using S3, Databricks, PySpark, Redshift, and Power BI across 70K+ candidate records.
+- End-to-end AWS pipeline using S3, Databricks, PySpark, Redshift, dbt, and Power BI across 70K+ candidate records.
 - Cleaning and standardization of skills, experience, salary expectations, and preferred-location data.
 - Unity Catalog for centralized access control and lineage.
 - Auto Loader and Airflow for 3K+ daily incremental candidate records.

@@ -82,7 +82,7 @@ test('verified evidence and experience are present in static HTML', () => {
     /<article\b[^>]*class="experience-entry"[\s\S]*?Antern Technologies[\s\S]*?<\/article>/i,
   )?.[0];
   assert.ok(anternEntry, 'Antern experience entry must exist');
-  assert.doesNotMatch(anternEntry, /\bdbt\b/i);
+  assert.match(anternEntry, /\bdbt\b/i);
 });
 
 test('all project case studies and architecture summaries work without JavaScript', () => {

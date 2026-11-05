@@ -85,8 +85,8 @@ test('experience uses exact resume titles, organizations, and dates', async () =
   const antern = EXPERIENCE_SUMMARIES.find(
     ({ organization }) => organization === 'Antern Technologies',
   );
-  assert.ok(!antern.stack.includes('dbt'), 'Antern stack must not add resume-unsupported dbt');
-  assert.ok(!JSON.stringify(antern).toLowerCase().includes('dbt'));
+  assert.ok(antern.stack.includes('dbt'), 'Antern stack must include the user-verified dbt work');
+  assert.ok(JSON.stringify(antern).toLowerCase().includes('dbt'));
 });
 
 test('projects use supported stacks, completed status, and no guessed links', async () => {

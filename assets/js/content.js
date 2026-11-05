@@ -55,6 +55,7 @@ export const EXPERIENCE_SUMMARIES = Object.freeze([
       'Databricks',
       'PySpark',
       'Redshift',
+      'dbt',
       'Airflow',
       'Power BI',
     ],
