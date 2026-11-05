@@ -1,803 +1,678 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Supreeth Gunniguntla Vidyasagar — Data Engineer</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:#15171c;
-    --paper:#f7f5f0;
-    --paper-2:#efece4;
-    --paper-3:#e8e4d8;
-    --line:#d8d3c8;
-    --line-2:#c8c3b5;
-    --muted:#6f6b62;
-    --bronze:#b08148;
-    --silver:#9aa3ad;
-    --gold:#c8931a;
-    --gold-light:#f0c060;
-    --signal:#1f6feb;
-    --green:#22863a;
-    --display:'Space Grotesk',system-ui,sans-serif;
-    --mono:'JetBrains Mono',ui-monospace,monospace;
-    --radius:14px;
-    --shadow:0 4px 24px -8px rgba(21,23,28,.12);
-    --shadow-lg:0 16px 48px -16px rgba(21,23,28,.22);
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{
-    background:var(--paper);
-    color:var(--ink);
-    font-family:var(--display);
-    line-height:1.5;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  a{color:inherit;text-decoration:none}
-  ::selection{background:var(--gold-light);color:var(--ink)}
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Supreeth Gunniguntla Vidyasagar — Data Engineer</title>
+    <meta
+      name="description"
+      content="Data Engineer building reliable pipelines, warehouses, cloud data platforms, Databricks solutions, and applied AI systems."
+    >
+    <meta name="author" content="Supreeth Gunniguntla Vidyasagar">
+    <meta name="theme-color" content="#080b10">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://gvsupreeth.github.io/Portfolio/">
+    <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./assets/css/styles.css">
 
-  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Supreeth Gunniguntla Vidyasagar — Data Engineer">
+    <meta
+      property="og:description"
+      content="Data pipelines, cloud platforms, Databricks, data warehousing, and applied AI."
+    >
+    <meta property="og:url" content="https://gvsupreeth.github.io/Portfolio/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Supreeth Gunniguntla Vidyasagar — Data Engineer">
+    <meta
+      name="twitter:description"
+      content="Data pipelines, cloud platforms, Databricks, data warehousing, and applied AI."
+    >
 
-  /* ---------- scroll progress ---------- */
-  #prog{
-    position:fixed;top:0;left:0;height:3px;z-index:200;
-    background:linear-gradient(90deg,var(--gold),var(--bronze));
-    width:0%;transition:width .1s linear;
-  }
-
-  /* ---------- nav ---------- */
-  nav{
-    position:sticky;top:0;z-index:100;
-    background:rgba(247,245,240,.88);
-    backdrop-filter:blur(14px);
-    -webkit-backdrop-filter:blur(14px);
-    border-bottom:1px solid var(--line);
-  }
-  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:62px}
-  .brand{font-family:var(--mono);font-size:13px;font-weight:600;letter-spacing:.04em;display:flex;align-items:center;gap:10px}
-  .brand-dot{color:var(--gold)}
-  .avail-badge{
-    display:inline-flex;align-items:center;gap:5px;
-    font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;
-    background:#dcf4e4;color:#1a6b34;
-    border:1px solid #b3e5c8;border-radius:999px;
-    padding:3px 10px;
-  }
-  .avail-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:#22863a;animation:blink 2s ease-in-out infinite}
-  @keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
-  .nav-links{display:flex;gap:26px;font-family:var(--mono);font-size:12.5px;color:var(--muted)}
-  .nav-links a{transition:color .2s}
-  .nav-links a:hover{color:var(--ink)}
-  @media(max-width:700px){.nav-links{display:none}.avail-badge{display:none}}
-
-  /* ---------- hero ---------- */
-  header{
-    padding:90px 0 70px;position:relative;overflow:hidden;
-  }
-  .hero-bg{
-    position:absolute;inset:0;pointer-events:none;overflow:hidden;
-  }
-  .hero-bg svg{
-    position:absolute;right:-60px;top:-40px;opacity:.045;width:700px;
-  }
-  .hero-grid{
-    position:absolute;inset:0;
-    background-image:
-      linear-gradient(var(--line) 1px,transparent 1px),
-      linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:48px 48px;
-    opacity:.35;
-    mask-image:radial-gradient(ellipse 80% 80% at 50% 0%,#000 30%,transparent 100%);
-  }
-  .hero-inner{position:relative}
-  .hero-top{display:flex;align-items:flex-start;gap:32px;flex-wrap:wrap}
-  .avatar{
-    flex-shrink:0;width:72px;height:72px;border-radius:18px;
-    background:linear-gradient(135deg,var(--ink) 0%,#3a3d46 100%);
-    display:flex;align-items:center;justify-content:center;
-    font-family:var(--mono);font-size:22px;font-weight:600;color:var(--gold-light);
-    border:2px solid var(--line-2);
-    box-shadow:var(--shadow);
-  }
-  .hero-text{}
-  .eyebrow{
-    font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;
-    text-transform:uppercase;color:var(--bronze);margin-bottom:18px;
-    display:flex;align-items:center;gap:8px;
-  }
-  .eyebrow::before{content:'';width:24px;height:1px;background:var(--bronze);display:inline-block}
-  h1{
-    font-size:clamp(36px,6.5vw,72px);
-    font-weight:700;line-height:1.02;letter-spacing:-.025em;
-    max-width:16ch;
-  }
-  h1 em{font-style:normal;color:var(--muted)}
-  .lede{
-    margin-top:24px;max-width:56ch;font-size:clamp(15px,2vw,18px);
-    color:#33363d;line-height:1.65;
-  }
-  .hero-meta{
-    display:flex;flex-wrap:wrap;gap:8px;margin-top:28px;
-    font-family:var(--mono);font-size:12px;
-  }
-  .chip{
-    border:1px solid var(--line-2);background:var(--paper);
-    padding:5px 12px;border-radius:999px;color:#42454c;
-    transition:border-color .2s,background .2s;
-  }
-  .chip:hover{border-color:var(--bronze);background:var(--paper-2)}
-  .cta-row{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}
-  .btn{
-    font-family:var(--mono);font-size:13px;font-weight:500;
-    padding:12px 22px;border-radius:10px;border:1.5px solid var(--ink);
-    transition:transform .15s,background .2s,color .2s,box-shadow .2s;
-    display:inline-flex;align-items:center;gap:6px;
-  }
-  .btn.solid{background:var(--ink);color:var(--paper)}
-  .btn.solid:hover{transform:translateY(-2px);box-shadow:0 8px 20px -8px rgba(21,23,28,.4)}
-  .btn.ghost:hover{background:var(--ink);color:var(--paper);transform:translateY(-2px)}
-
-  /* ---------- pipeline ---------- */
-  .pipeline{
-    margin-top:60px;border:1px solid var(--line-2);border-radius:var(--radius);
-    background:linear-gradient(160deg,var(--paper-2) 0%,var(--paper) 100%);
-    padding:28px 26px;overflow:hidden;
-    box-shadow:var(--shadow);
-  }
-  .pipe-label{
-    font-family:var(--mono);font-size:11px;letter-spacing:.12em;
-    text-transform:uppercase;color:var(--muted);margin-bottom:18px;
-  }
-  .flow{display:flex;align-items:stretch;gap:0;flex-wrap:wrap}
-  .stage{
-    flex:1 1 0;min-width:120px;position:relative;
-    padding:18px 16px;border-radius:10px;background:var(--paper);
-    border:1px solid var(--line);
-    transition:box-shadow .2s,transform .2s;
-  }
-  .stage:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
-  .stage h4{font-family:var(--mono);font-size:13px;font-weight:600;margin-bottom:6px}
-  .stage p{font-family:var(--mono);font-size:11px;color:var(--muted);line-height:1.5}
-  .stage .tier{
-    position:absolute;top:-9px;left:14px;font-family:var(--mono);
-    font-size:9.5px;letter-spacing:.1em;padding:2px 8px;border-radius:5px;
-    color:#fff;text-transform:uppercase;font-weight:600;
-  }
-  .t-src{background:var(--ink)}
-  .t-bronze{background:var(--bronze)}
-  .t-silver{background:var(--silver)}
-  .t-gold{background:var(--gold);color:var(--ink)}
-  .arrow{
-    display:flex;align-items:center;justify-content:center;
-    width:32px;flex:0 0 32px;color:var(--muted);
-  }
-  .arrow span{
-    font-family:var(--mono);font-size:18px;
-    animation:pulse 2.4s ease-in-out infinite;
-  }
-  .arrow:nth-child(4) span{animation-delay:.3s}
-  .arrow:nth-child(6) span{animation-delay:.6s}
-  @keyframes pulse{0%,100%{opacity:.2;transform:translateX(-3px)}50%{opacity:1;transform:translateX(3px)}}
-  @media(max-width:680px){
-    .flow{flex-direction:column;gap:0}
-    .arrow{width:100%;height:28px;transform:rotate(90deg)}
-  }
-
-  /* ---------- stats strip ---------- */
-  .stats{
-    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-    padding:44px 0;background:var(--paper-2);
-  }
-  .stats-inner{
-    display:grid;grid-template-columns:repeat(4,1fr);
-    gap:0;text-align:center;
-  }
-  .stat{padding:0 20px;position:relative}
-  .stat+.stat::before{
-    content:'';position:absolute;left:0;top:10%;height:80%;
-    width:1px;background:var(--line-2);
-  }
-  .stat-num{
-    font-size:clamp(32px,4vw,48px);font-weight:700;letter-spacing:-.03em;
-    color:var(--ink);line-height:1;
-    font-variant-numeric:tabular-nums;
-  }
-  .stat-num span{color:var(--gold)}
-  .stat-label{
-    font-family:var(--mono);font-size:11.5px;color:var(--muted);
-    margin-top:6px;letter-spacing:.04em;line-height:1.4;
-  }
-  @media(max-width:600px){
-    .stats-inner{grid-template-columns:repeat(2,1fr);gap:28px 0}
-    .stat:nth-child(3)::before{display:none}
-    .stat+.stat::before{display:none}
-    .stat:nth-child(2)::before,.stat:nth-child(4)::before{display:block}
-  }
-
-  /* ---------- section frame ---------- */
-  section{padding:80px 0;border-top:1px solid var(--line)}
-  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:44px}
-  .sec-num{font-family:var(--mono);font-size:12px;color:var(--gold);font-weight:600;letter-spacing:.06em}
-  .sec-title{font-size:clamp(22px,3.5vw,32px);font-weight:700;letter-spacing:-.015em}
-
-  /* ---------- experience ---------- */
-  .timeline{position:relative;padding-left:0}
-  .job{
-    display:grid;grid-template-columns:220px 1fr;gap:36px;
-    padding:32px 0;border-top:1px solid var(--line);
-    position:relative;
-  }
-  .job:first-of-type{border-top:none;padding-top:0}
-  .job-meta .role{font-weight:700;font-size:17px;line-height:1.2}
-  .job-meta .co{
-    font-family:var(--mono);font-size:13px;color:var(--bronze);
-    margin-top:5px;font-weight:600;
-  }
-  .job-meta .loc{
-    font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:4px;
-  }
-  .job-meta .when{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:8px}
-  .job-meta .note{
-    font-family:var(--mono);font-size:10.5px;color:var(--muted);
-    margin-top:6px;font-style:italic;
-    background:var(--paper-2);border:1px solid var(--line);
-    border-radius:6px;padding:3px 8px;display:inline-block;
-  }
-  .job ul{list-style:none;display:flex;flex-direction:column;gap:13px}
-  .job li{
-    position:relative;padding-left:22px;
-    font-size:14.5px;color:#2c2f36;line-height:1.6;
-  }
-  .job li::before{
-    content:'';position:absolute;left:0;top:9px;
-    width:8px;height:8px;border-radius:2px;
-    background:var(--gold);flex-shrink:0;
-  }
-  .job li strong{color:var(--ink)}
-  @media(max-width:700px){.job{grid-template-columns:1fr;gap:16px}}
-
-  /* ---------- skills ---------- */
-  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-  .skill-card{
-    border:1px solid var(--line);border-radius:var(--radius);
-    padding:24px;background:var(--paper-2);
-    transition:transform .2s,box-shadow .2s,border-color .2s;
-  }
-  .skill-card:hover{
-    transform:translateY(-3px);
-    box-shadow:var(--shadow);
-    border-color:var(--line-2);
-  }
-  .skill-icon{font-size:22px;margin-bottom:12px;line-height:1}
-  .skill-card h4{
-    font-family:var(--mono);font-size:11px;letter-spacing:.1em;
-    text-transform:uppercase;color:var(--bronze);margin-bottom:14px;font-weight:600;
-  }
-  .tags{display:flex;flex-wrap:wrap;gap:7px}
-  .tag{
-    font-family:var(--mono);font-size:12px;color:#34373e;
-    background:var(--paper);border:1px solid var(--line);
-    padding:4px 10px;border-radius:7px;
-    transition:border-color .15s,background .15s;
-  }
-  .tag:hover{border-color:var(--bronze);background:var(--paper-3)}
-
-  /* ---------- projects ---------- */
-  .proj-grid{display:flex;flex-direction:column;gap:16px}
-  .proj{
-    border:1px solid var(--line);border-radius:var(--radius);
-    padding:30px;background:var(--paper-2);
-    transition:transform .2s,box-shadow .2s,border-color .2s;
-    position:relative;overflow:hidden;
-  }
-  .proj::before{
-    content:'';position:absolute;top:0;left:0;right:0;height:3px;
-    background:linear-gradient(90deg,var(--gold),var(--bronze));
-    opacity:0;transition:opacity .2s;
-  }
-  .proj:hover{
-    transform:translateY(-3px);
-    box-shadow:var(--shadow-lg);
-    border-color:var(--line-2);
-  }
-  .proj:hover::before{opacity:1}
-  .proj-top{
-    display:flex;justify-content:space-between;
-    align-items:flex-start;gap:16px;flex-wrap:wrap;
-  }
-  .proj-num{
-    font-family:var(--mono);font-size:11px;font-weight:600;
-    color:var(--gold);letter-spacing:.08em;margin-bottom:6px;
-  }
-  .proj h3{font-size:18px;font-weight:700;letter-spacing:-.01em}
-  .proj .stack{
-    display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;
-  }
-  .stack-badge{
-    font-family:var(--mono);font-size:11px;
-    background:var(--paper);border:1px solid var(--signal);
-    color:var(--signal);padding:3px 9px;border-radius:6px;
-    letter-spacing:.02em;
-  }
-  .proj ul{list-style:none;margin-top:18px;display:flex;flex-direction:column;gap:10px}
-  .proj li{
-    position:relative;padding-left:18px;
-    font-size:14.5px;color:#2c2f36;line-height:1.6;
-  }
-  .proj li::before{
-    content:'›';position:absolute;left:0;
-    color:var(--bronze);font-family:var(--mono);font-size:16px;
-    line-height:1.4;
-  }
-
-  /* ---------- education ---------- */
-  .edu-grid{display:flex;flex-direction:column;gap:0}
-  .edu-item{
-    display:grid;grid-template-columns:220px 1fr;gap:36px;
-    padding:28px 0;border-top:1px solid var(--line);
-  }
-  .edu-item:first-of-type{border-top:none;padding-top:0}
-  .edu-meta .school{font-weight:700;font-size:17px}
-  .edu-meta .degree{
-    font-family:var(--mono);font-size:13px;color:var(--bronze);margin-top:5px;font-weight:600;
-  }
-  .edu-meta .loc{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:4px}
-  .edu-meta .when{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:8px}
-  .edu-body{}
-  .edu-sub{
-    display:inline-flex;align-items:center;gap:8px;
-    background:var(--paper-2);border:1px solid var(--line);
-    border-radius:8px;padding:12px 16px;margin-bottom:14px;
-  }
-  .edu-sub-role{font-weight:600;font-size:14.5px}
-  .edu-sub-org{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:2px}
-  .edu-sub-when{font-family:var(--mono);font-size:11.5px;color:var(--gold);margin-left:auto;white-space:nowrap}
-  .edu-sub-wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;width:100%}
-  .edu-note{
-    font-size:14.5px;color:#2c2f36;line-height:1.6;
-  }
-  @media(max-width:700px){
-    .edu-item{grid-template-columns:1fr;gap:14px}
-  }
-
-  /* ---------- footer ---------- */
-  footer{
-    background:var(--ink);color:var(--paper);
-    padding:80px 0 64px;text-align:center;
-    border-top:none;
-  }
-  .foot-eyebrow{
-    font-family:var(--mono);font-size:11px;letter-spacing:.14em;
-    text-transform:uppercase;color:var(--gold);margin-bottom:16px;
-    display:flex;align-items:center;justify-content:center;gap:8px;
-  }
-  .foot-eyebrow::before,.foot-eyebrow::after{content:'';width:32px;height:1px;background:var(--gold);display:inline-block;opacity:.6}
-  footer h2{
-    font-size:clamp(26px,4.5vw,44px);font-weight:700;
-    letter-spacing:-.02em;
-    color:var(--paper);
-  }
-  footer p{color:#a8a39a;margin-top:12px;font-size:16px}
-  .foot-links{
-    display:flex;gap:12px;justify-content:center;
-    margin-top:36px;flex-wrap:wrap;font-family:var(--mono);font-size:13px;
-  }
-  .foot-links a{
-    border:1px solid rgba(247,245,240,.2);
-    color:var(--paper);
-    padding:11px 20px;border-radius:10px;
-    transition:background .2s,border-color .2s,transform .15s;
-    display:inline-flex;align-items:center;gap:7px;
-  }
-  .foot-links a:hover{
-    background:rgba(247,245,240,.1);
-    border-color:rgba(247,245,240,.4);
-    transform:translateY(-2px);
-  }
-  .colophon{
-    margin-top:52px;font-family:var(--mono);font-size:11px;
-    color:#6b6660;border-top:1px solid rgba(255,255,255,.08);
-    padding-top:28px;
-  }
-
-  /* ---------- reveal ---------- */
-  .reveal{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease}
-  .reveal.in{opacity:1;transform:none}
-  @media(prefers-reduced-motion:reduce){
-    .reveal{opacity:1;transform:none;transition:none}
-    .arrow span{animation:none;opacity:.7}
-    html{scroll-behavior:auto}
-  }
-  :focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:4px}
-
-  /* ---------- back to top ---------- */
-  #btt{
-    position:fixed;bottom:28px;right:28px;z-index:90;
-    width:42px;height:42px;border-radius:12px;
-    background:var(--ink);color:var(--paper);
-    border:1px solid rgba(255,255,255,.15);
-    display:flex;align-items:center;justify-content:center;
-    font-family:var(--mono);font-size:16px;
-    cursor:pointer;
-    opacity:0;pointer-events:none;
-    transition:opacity .3s,transform .2s;
-    box-shadow:var(--shadow-lg);
-  }
-  #btt.show{opacity:1;pointer-events:auto}
-  #btt:hover{transform:translateY(-3px)}
-</style>
-</head>
-<body>
-
-<div id="prog"></div>
-
-<nav>
-  <div class="wrap nav-inner">
-    <div class="brand">
-      <span>supreeth<span class="brand-dot">.</span>gv</span>
-      <span class="avail-badge">Available for FT roles</span>
-    </div>
-    <div class="nav-links">
-      <a href="#work">experience</a>
-      <a href="#stack">stack</a>
-      <a href="#projects">projects</a>
-      <a href="#education">education</a>
-      <a href="#contact">contact</a>
-    </div>
-  </div>
-</nav>
-
-<header>
-  <div class="hero-bg">
-    <div class="hero-grid"></div>
-    <svg viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <circle cx="300" cy="300" r="280" stroke="#15171c" stroke-width="1"/>
-      <circle cx="300" cy="300" r="200" stroke="#15171c" stroke-width="1"/>
-      <circle cx="300" cy="300" r="120" stroke="#15171c" stroke-width="1"/>
-      <line x1="20" y1="300" x2="580" y2="300" stroke="#15171c" stroke-width="1"/>
-      <line x1="300" y1="20" x2="300" y2="580" stroke="#15171c" stroke-width="1"/>
-    </svg>
-  </div>
-  <div class="wrap hero-inner">
-    <div class="hero-top">
-      <div class="avatar reveal" aria-hidden="true">SG</div>
-      <div class="hero-text">
-        <div class="eyebrow reveal">Data Engineer · AWS · Azure · GCP</div>
-        <h1 class="reveal">Turning messy data into <em>pipelines that hold up.</em></h1>
-      </div>
-    </div>
-    <p class="lede reveal">I build enterprise-grade data pipelines and analytical platforms — from ESG regulatory reporting at EY to real-time streaming systems. PySpark, dbt, and Airflow are where I live.</p>
-    <div class="hero-meta reveal">
-      <span class="chip">PySpark</span>
-      <span class="chip">dbt</span>
-      <span class="chip">Airflow</span>
-      <span class="chip">Snowflake</span>
-      <span class="chip">Kafka</span>
-      <span class="chip">Databricks</span>
-    </div>
-    <div class="cta-row reveal">
-      <a class="btn solid" href="#projects">See the work</a>
-      <a class="btn ghost" href="#contact">Get in touch</a>
-    </div>
-
-    <div class="pipeline reveal" aria-label="Data pipeline diagram">
-      <div class="pipe-label">// how the data moves</div>
-      <div class="flow">
-        <div class="stage"><span class="tier t-src">source</span><h4>Ingest</h4><p>S3 · Kafka · ADF batch + stream</p></div>
-        <div class="arrow"><span>→</span></div>
-        <div class="stage"><span class="tier t-bronze">bronze</span><h4>Raw land</h4><p>schema validation on arrival</p></div>
-        <div class="arrow"><span>→</span></div>
-        <div class="stage"><span class="tier t-silver">silver</span><h4>Transform</h4><p>PySpark · dbt models</p></div>
-        <div class="arrow"><span>→</span></div>
-        <div class="stage"><span class="tier t-gold">gold</span><h4>Serve</h4><p>Power BI · Tableau · Snowflake</p></div>
-      </div>
-    </div>
-  </div>
-</header>
-
-<!-- Stats strip -->
-<div class="stats">
-  <div class="wrap">
-    <div class="stats-inner">
-      <div class="stat reveal">
-        <div class="stat-num"><span class="count" data-target="260">0</span><span>+</span></div>
-        <div class="stat-label">DB workflows<br>re-engineered at EY</div>
-      </div>
-      <div class="stat reveal">
-        <div class="stat-num"><span class="count" data-target="70">0</span><span>%</span></div>
-        <div class="stat-label">throughput<br>improvement delivered</div>
-      </div>
-      <div class="stat reveal">
-        <div class="stat-num"><span class="count" data-target="16">0</span><span>M+</span></div>
-        <div class="stat-label">customers served<br>via warehouse build</div>
-      </div>
-      <div class="stat reveal">
-        <div class="stat-num"><span class="count" data-target="3">0</span></div>
-        <div class="stat-label">cloud platforms<br>AWS · Azure · GCP</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<section id="work">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="sec-num">01</span>
-      <h2 class="sec-title">Experience</h2>
-    </div>
-
-    <div class="timeline">
-      <div class="job reveal">
-        <div class="job-meta">
-          <div class="role">Data Engineering Intern</div>
-          <div class="co">Antern Technologies</div>
-          <div class="loc">Bengaluru, India</div>
-          <div class="when">May 2025 – Aug 2025</div>
-        </div>
-        <ul>
-          <li>Owned end-to-end design of an <strong>AWS-native pipeline</strong> (S3 → Databricks → dbt → Redshift → Power BI), surfacing gender, experience, location, and salary trends to give HR teams their first data-backed view of workforce composition.</li>
-          <li>Engineered <strong>PySpark transformations</strong> to normalize inconsistent experience data, resolve multi-valued fields, and extract structured attributes from raw HR records at scale.</li>
-          <li>Designed a <strong>fact-dimension model using dbt</strong>, enabling self-serve analytics and clean separation of reporting logic from raw data.</li>
-          <li>Automated daily ingestion and incremental loading via <strong>Apache Airflow</strong>, eliminating manual intervention across the pipeline.</li>
-        </ul>
-      </div>
-
-      <div class="job reveal">
-        <div class="job-meta">
-          <div class="role">Senior Analyst</div>
-          <div class="co">EY</div>
-          <div class="loc">Bengaluru, India</div>
-          <div class="when">Feb 2023 – Jul 2024</div>
-          <div class="note">Joined as intern · converted full-time</div>
-        </div>
-        <ul>
-          <li>Scaled a <strong>SaaS ESG platform</strong> to enterprise-grade performance by re-engineering 260+ database workflows, eliminating bottlenecks and achieving a <strong>70% throughput improvement</strong> under peak load.</li>
-          <li>Contributed to the design and delivery of <strong>140+ PostgreSQL stored procedures</strong> for ESG regulatory reporting, directly strengthening statutory compliance and reducing legal exposure.</li>
-          <li>Architected secure analytical dashboards with role-based access controls and query indexing, enabling auditable <strong>5-year trend analysis at 70% faster response times</strong>.</li>
-          <li>Led data architecture for a banking client's enterprise warehouse, consolidating <strong>3 source systems into a unified analytical layer serving 16M+ customers</strong>, implementing SCD Type 2 for full historical lineage.</li>
-          <li>Applied data profiling across 3 source systems to design a clean fact-dimension model from <strong>35+ business reports</strong>, resolving inconsistencies and standardizing reporting logic across teams.</li>
-          <li>Introduced <strong>dbt + Apache Airflow</strong> into the reporting stack, replacing manual workflows with fully automated, reliable pipeline orchestration.</li>
-          <li>Architected <strong>43 normalized ER models</strong> using Oracle SQL Developer Data Modeler, establishing a scalable schema foundation that cut debugging time by 50%.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="stack">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="sec-num">02</span>
-      <h2 class="sec-title">Stack</h2>
-    </div>
-    <div class="skills-grid">
-      <div class="skill-card reveal">
-        <div class="skill-icon">⌨️</div>
-        <h4>Programming</h4>
-        <div class="tags">
-          <span class="tag">Python</span>
-          <span class="tag">SQL</span>
-          <span class="tag">PL/SQL</span>
-        </div>
-      </div>
-      <div class="skill-card reveal">
-        <div class="skill-icon">⚙️</div>
-        <h4>Data Engineering</h4>
-        <div class="tags">
-          <span class="tag">Airflow</span>
-          <span class="tag">Spark</span>
-          <span class="tag">Kafka</span>
-          <span class="tag">dbt</span>
-          <span class="tag">Databricks</span>
-          <span class="tag">PostgreSQL</span>
-          <span class="tag">Snowflake</span>
-        </div>
-      </div>
-      <div class="skill-card reveal">
-        <div class="skill-icon">🗂️</div>
-        <h4>Data Modeling</h4>
-        <div class="tags">
-          <span class="tag">Dimensional</span>
-          <span class="tag">Medallion</span>
-          <span class="tag">ER Diagrams</span>
-        </div>
-      </div>
-      <div class="skill-card reveal">
-        <div class="skill-icon">☁️</div>
-        <h4>Cloud Platforms</h4>
-        <div class="tags">
-          <span class="tag">AWS</span>
-          <span class="tag">GCP</span>
-          <span class="tag">Azure</span>
-        </div>
-      </div>
-      <div class="skill-card reveal">
-        <div class="skill-icon">📊</div>
-        <h4>Visualization</h4>
-        <div class="tags">
-          <span class="tag">Tableau</span>
-          <span class="tag">Power BI</span>
-          <span class="tag">Looker Studio</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="projects">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="sec-num">03</span>
-      <h2 class="sec-title">Projects</h2>
-    </div>
-
-    <div class="proj-grid">
-      <div class="proj reveal">
-        <div class="proj-top">
-          <div>
-            <div class="proj-num">PROJECT 01</div>
-            <h3>Real-Time Logistics Tracking Pipeline</h3>
-            <div class="stack">
-              <span class="stack-badge">Kafka</span>
-              <span class="stack-badge">Spark Structured Streaming</span>
-              <span class="stack-badge">Snowflake</span>
-            </div>
-          </div>
-        </div>
-        <ul>
-          <li>Ingested real-time GPS and delivery status events via Kafka, processed with Spark Structured Streaming to detect delays and route deviations, landing enriched data into Snowflake via incremental micro-batch writes.</li>
-          <li>Implemented watermarking and late-arrival handling to ensure event-time accuracy, powering operational dashboards for last-mile delivery visibility.</li>
-        </ul>
-      </div>
-
-      <div class="proj reveal">
-        <div class="proj-top">
-          <div>
-            <div class="proj-num">PROJECT 02</div>
-            <h3>Supply Chain Analytics Platform</h3>
-            <div class="stack">
-              <span class="stack-badge">Azure Data Factory</span>
-              <span class="stack-badge">dbt</span>
-              <span class="stack-badge">Power BI</span>
-            </div>
-          </div>
-        </div>
-        <ul>
-          <li>Built an Azure-native batch pipeline using ADF for ingestion into ADLS Gen2, processing 100K+ records across Bronze/Silver/Gold medallion layers with dbt handling all transformation logic.</li>
-          <li>Delivered Power BI dashboards giving inventory managers visibility into stock levels and reorder triggers, replacing manual reporting across the supply chain.</li>
-        </ul>
-      </div>
-
-      <div class="proj reveal">
-        <div class="proj-top">
-          <div>
-            <div class="proj-num">PROJECT 03</div>
-            <h3>Financial Intelligence Hub</h3>
-            <div class="stack">
-              <span class="stack-badge">LangChain</span>
-              <span class="stack-badge">ChromaDB</span>
-              <span class="stack-badge">Gemini Flash</span>
-              <span class="stack-badge">Streamlit</span>
-            </div>
-          </div>
-        </div>
-        <ul>
-          <li>Built a multi-tool ReAct agent using LangChain and Gemini Flash covering real-time stock data, technical indicators (MA/RSI), and autonomous trade execution.</li>
-          <li>Implemented a RAG pipeline using ChromaDB and Google Generative AI embeddings for contextual S&P 500 analysis, deployed via Streamlit with a portfolio dashboard showing live P&amp;L and trade history.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="education">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="sec-num">04</span>
-      <h2 class="sec-title">Education</h2>
-    </div>
-
-    <div class="edu-grid">
-      <div class="edu-item reveal">
-        <div class="edu-meta">
-          <div class="school">Indiana University</div>
-          <div class="degree">M.S. Data Science</div>
-          <div class="loc">Bloomington, USA</div>
-          <div class="when">Aug 2024 – May 2026</div>
-        </div>
-        <div class="edu-body">
-          <div class="edu-sub">
-            <div class="edu-sub-wrap">
-              <div>
-                <div class="edu-sub-role">Research Assistant</div>
-                <div class="edu-sub-org">O'Neill School of Public and Environmental Affairs, IU</div>
-              </div>
-              <div class="edu-sub-when">Jan 2026 – May 2026</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer id="contact">
-  <div class="wrap">
-    <div class="foot-eyebrow reveal">Open to opportunities</div>
-    <h2 class="reveal">Building something data-heavy?</h2>
-    <p class="reveal">Open to data engineering roles. Let's talk pipelines.</p>
-    <div class="foot-links reveal">
-      <a href="mailto:supreethgvvs@gmail.com">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-        supreethgvvs@gmail.com
-      </a>
-      <a href="https://linkedin.com/in/g-v-supreeth-331610217" target="_blank" rel="noopener">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-        LinkedIn
-      </a>
-      <a href="tel:+18129473894">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.64 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.06 6.06l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        +1 (812) 947-3894
-      </a>
-    </div>
-    <div class="colophon reveal">
-      M.S. Data Science · Indiana University Bloomington · 2024–2026 &nbsp;·&nbsp; Built with vanilla HTML/CSS
-    </div>
-  </div>
-</footer>
-
-<button id="btt" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-
-<script>
-  /* scroll progress */
-  const prog = document.getElementById('prog');
-  const btt = document.getElementById('btt');
-  window.addEventListener('scroll',()=>{
-    const s = document.documentElement;
-    const pct = (s.scrollTop / (s.scrollHeight - s.clientHeight)) * 100;
-    prog.style.width = pct + '%';
-    btt.classList.toggle('show', s.scrollTop > 400);
-  },{passive:true});
-
-  /* reveal on scroll */
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        e.target.classList.add('in');
-        io.unobserve(e.target);
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Supreeth Gunniguntla Vidyasagar",
+        "jobTitle": "Data Engineer",
+        "email": "mailto:supreethgvvs@gmail.com",
+        "url": "https://gvsupreeth.github.io/Portfolio/",
+        "alumniOf": [
+          {
+            "@type": "CollegeOrUniversity",
+            "name": "Indiana University Bloomington"
+          },
+          {
+            "@type": "CollegeOrUniversity",
+            "name": "New Horizon College of Engineering"
+          }
+        ],
+        "sameAs": [
+          "https://github.com/GVSupreeth",
+          "https://www.linkedin.com/in/supreeth-gunniguntla-vidyasagar-331610217/"
+        ]
       }
-    });
-  },{threshold:.1});
-  document.querySelectorAll('.reveal').forEach((el,i)=>{
-    el.style.transitionDelay = (i % 5 * 70) + 'ms';
-    io.observe(el);
-  });
+    </script>
+    <script type="module" src="./assets/js/main.js"></script>
+  </head>
 
-  /* animated counters */
-  const counters = document.querySelectorAll('.count');
-  const cio = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(!e.isIntersecting) return;
-      const el = e.target;
-      const target = +el.dataset.target;
-      const dur = 1200;
-      const step = 16;
-      const inc = target / (dur / step);
-      let cur = 0;
-      const t = setInterval(()=>{
-        cur = Math.min(cur + inc, target);
-        el.textContent = Math.floor(cur);
-        if(cur >= target) clearInterval(t);
-      }, step);
-      cio.unobserve(el);
-    });
-  },{threshold:.4});
-  counters.forEach(c => cio.observe(c));
-</script>
-</body>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <div class="scroll-progress" aria-hidden="true">
+      <span id="scroll-progress-bar"></span>
+    </div>
+
+    <header class="site-header" aria-label="Site header">
+      <a class="brand" href="#top" aria-label="Supreeth Gunniguntla Vidyasagar, back to top">
+        <span class="brand-mark" aria-hidden="true">SG</span>
+        <span class="brand-copy">
+          <strong>Supreeth G. V.</strong>
+          <span>Data Engineer</span>
+        </span>
+      </a>
+
+      <button
+        class="nav-toggle"
+        id="nav-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primary-nav"
+      >
+        <span class="sr-only">Toggle navigation</span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+
+      <nav id="primary-nav" aria-label="Primary navigation">
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#stack">Stack</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+        <a
+          class="nav-resume"
+          href="./assets/resume/Supreeth_Gunniguntla_Vidyasagar_Resume.docx"
+          download
+        >Résumé</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="topology-field" aria-hidden="true">
+          <span class="topology-line topology-line-one"></span>
+          <span class="topology-line topology-line-two"></span>
+          <span class="topology-line topology-line-three"></span>
+          <span class="topology-node topology-node-one"></span>
+          <span class="topology-node topology-node-two"></span>
+          <span class="topology-node topology-node-three"></span>
+        </div>
+
+        <div class="page-shell hero-grid">
+          <div class="hero-copy" data-reveal>
+            <p class="system-label"><span aria-hidden="true">●</span> Data Engineer · Cloud · Databricks · Applied AI</p>
+            <p class="hero-name">Supreeth Gunniguntla Vidyasagar</p>
+            <h1 id="hero-title">Building data systems that turn complexity into decisions.</h1>
+            <p class="hero-intro">
+              I design data pipelines, warehouses, and cloud platforms that move messy information
+              into governed, analytics-ready systems. My work spans PostgreSQL engineering for
+              regulatory platforms, Databricks pipelines on AWS and Azure, and applied AI for
+              evidence-backed matching.
+            </p>
+
+            <div class="hero-actions">
+              <a class="button button-primary" href="#projects">
+                Explore work <span aria-hidden="true">↘</span>
+              </a>
+              <a
+                class="button button-secondary"
+                href="./assets/resume/Supreeth_Gunniguntla_Vidyasagar_Resume.docx"
+                download
+              >
+                View résumé <span aria-hidden="true">↓</span>
+              </a>
+            </div>
+
+            <div class="hero-links" aria-label="Professional profiles">
+              <a
+                href="https://github.com/GVSupreeth"
+                target="_blank"
+                rel="noopener noreferrer"
+              >GitHub <span aria-hidden="true">↗</span></a>
+              <a
+                href="https://www.linkedin.com/in/supreeth-gunniguntla-vidyasagar-331610217/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >LinkedIn <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+
+          <div class="terminal" id="terminal" data-reveal>
+            <div class="terminal-bar">
+              <div class="terminal-lights" aria-hidden="true">
+                <span></span><span></span><span></span>
+              </div>
+              <p>supreeth@portfolio:~/lineage</p>
+              <span class="terminal-status"><i aria-hidden="true"></i> online</span>
+            </div>
+            <div class="terminal-body">
+              <div
+                class="terminal-output"
+                id="terminal-output"
+                role="log"
+                aria-live="polite"
+                aria-label="Terminal output"
+              >
+                <p><span class="terminal-muted">Boot sequence complete.</span></p>
+                <p>Data lineage console ready. Type <strong>help</strong> to explore.</p>
+              </div>
+              <form id="terminal-form" class="terminal-form" autocomplete="off">
+                <label for="terminal-input">
+                  <span aria-hidden="true">supreeth@portfolio:~$</span>
+                  <span class="sr-only">Terminal command</span>
+                </label>
+                <input
+                  id="terminal-input"
+                  name="command"
+                  type="text"
+                  inputmode="text"
+                  spellcheck="false"
+                  autocapitalize="off"
+                  autocomplete="off"
+                  placeholder="help"
+                >
+              </form>
+              <div class="command-suggestions" aria-label="Suggested terminal commands">
+                <button type="button" data-command="about">about</button>
+                <button type="button" data-command="experience">experience</button>
+                <button type="button" data-command="projects">projects</button>
+                <button type="button" data-command="stack">stack</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="evidence" aria-labelledby="evidence-title">
+        <div class="page-shell">
+          <div class="section-kicker" data-reveal>
+            <p>Verified scale</p>
+            <span>Résumé-backed evidence, not live telemetry</span>
+          </div>
+          <h2 class="sr-only" id="evidence-title">Engineering evidence</h2>
+          <div class="evidence-grid">
+            <article class="evidence-item" data-reveal>
+              <p class="evidence-value">16M+</p>
+              <h3>Banking customer records integrated</h3>
+              <p>Three source systems consolidated for regulatory and internal reporting at EY.</p>
+            </article>
+            <article class="evidence-item" data-reveal>
+              <p class="evidence-value">70K+</p>
+              <h3>Candidate records transformed</h3>
+              <p>AWS and Databricks pipeline with 3K+ incremental records processed daily.</p>
+            </article>
+            <article class="evidence-item" data-reveal>
+              <p class="evidence-value">100K+</p>
+              <h3>Chromosomes processed</h3>
+              <p>Reproducible population-genomics jobs executed on HPC infrastructure.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="experience" aria-labelledby="experience-title">
+        <div class="page-shell">
+          <header class="section-heading" data-reveal>
+            <p class="section-index">01 / EXPERIENCE</p>
+            <div>
+              <h2 id="experience-title">Systems built under real constraints.</h2>
+              <p>Research reproducibility, governed cloud pipelines, and regulatory data platforms.</p>
+            </div>
+          </header>
+
+          <div class="experience-timeline">
+            <article class="experience-entry" data-section-card data-reveal>
+              <div class="experience-marker" aria-hidden="true"><span></span></div>
+              <div class="experience-meta">
+                <p class="experience-date">Jan 2026 – May 2026</p>
+                <p class="experience-org">Indiana University</p>
+                <div class="tag-row" aria-label="Technologies used">
+                  <span>Snakemake</span><span>PostgreSQL</span><span>HPC</span><span>Python</span>
+                </div>
+              </div>
+              <div class="experience-content">
+                <p class="role-label">Research Assistant</p>
+                <h3>Reproducible population-genomics workflows</h3>
+                <p>
+                  Population-scale analyses needed repeatable execution across HPC infrastructure
+                  without coupling structured results to large raw genotype files.
+                </p>
+                <details data-experience-details>
+                  <summary>Technical contribution <span aria-hidden="true">+</span></summary>
+                  <div class="experience-details">
+                    <p>
+                      Built Snakemake workflows that parameterized quality control, PCA, and FST as
+                      reproducible jobs, then persisted results and run lineage in PostgreSQL.
+                    </p>
+                    <p class="outcome-line">
+                      <strong>Outcome:</strong> Processed data from 100K+ chromosomes and generated
+                      Python-based reports for the Great Lakes Fishery Commission and state agencies.
+                    </p>
+                  </div>
+                </details>
+              </div>
+            </article>
+
+            <article class="experience-entry" data-section-card data-reveal>
+              <div class="experience-marker" aria-hidden="true"><span></span></div>
+              <div class="experience-meta">
+                <p class="experience-date">May 2025 – Aug 2025</p>
+                <p class="experience-org">Antern Technologies</p>
+                <div class="tag-row" aria-label="Technologies used">
+                  <span>AWS</span><span>Databricks</span><span>PySpark</span><span>Redshift</span>
+                </div>
+              </div>
+              <div class="experience-content">
+                <p class="role-label">Data Engineering Intern</p>
+                <h3>Governed candidate analytics on AWS</h3>
+                <p>
+                  Inconsistent candidate data across skills, experience, salary expectations, and
+                  preferred locations had to become a dependable analytical dataset.
+                </p>
+                <details data-experience-details>
+                  <summary>Technical contribution <span aria-hidden="true">+</span></summary>
+                  <div class="experience-details">
+                    <p>
+                      Engineered an S3-to-Databricks pipeline with PySpark transformations, Redshift
+                      serving, dbt analytical models, and Power BI reporting. Unity Catalog centralized
+                      access controls and data lineage.
+                    </p>
+                    <p class="outcome-line">
+                      <strong>Outcome:</strong> Transformed 70K+ candidate records and automated 3K+
+                      daily incremental records with Auto Loader and Apache Airflow.
+                    </p>
+                  </div>
+                </details>
+              </div>
+            </article>
+
+            <article class="experience-entry experience-entry-featured" data-section-card data-reveal>
+              <div class="experience-marker" aria-hidden="true"><span></span></div>
+              <div class="experience-meta">
+                <p class="experience-date">Feb 2023 – Jul 2024</p>
+                <p class="experience-org">Ernst &amp; Young (EY)</p>
+                <div class="tag-row" aria-label="Technologies used">
+                  <span>PostgreSQL</span><span>dbt</span><span>Airflow</span><span>Data Modeling</span>
+                </div>
+              </div>
+              <div class="experience-content">
+                <p class="role-label">Senior Analyst</p>
+                <h3>PostgreSQL engineering for compliance and banking</h3>
+                <p>
+                  Two programs required different data-engineering responses: a performant ESG
+                  regulatory SaaS platform and a modernized reporting warehouse for banking data.
+                </p>
+                <div class="experience-stories">
+                  <article>
+                    <p class="story-label">01 / ESG Regulatory SaaS</p>
+                    <h4>Regulatory workflows that remained responsive at scale</h4>
+                    <p>
+                      Delivered 260+ PostgreSQL development tasks across acquisition, CRUD operations,
+                      stored procedures, functions, triggers, and SEBI BRSR reporting. ER models,
+                      role-based access control, and audit triggers strengthened governed access.
+                    </p>
+                    <p class="outcome-line">
+                      <strong>Outcome:</strong> Indexing and query/table optimization improved SQL
+                      execution and application performance by approximately 70%.
+                    </p>
+                  </article>
+                  <article>
+                    <p class="story-label">02 / Banking Data Warehouse</p>
+                    <h4>A unified reporting layer across three source systems</h4>
+                    <p>
+                      Contributed data profiling, source-to-target mapping, dimensional modeling, and
+                      integration of 16M+ customer records into an on-premises PostgreSQL warehouse
+                      supporting 35+ internal and RBI regulatory reports.
+                    </p>
+                    <p class="outcome-line">
+                      <strong>Outcome:</strong> dbt transformations in a Bronze–Silver–Gold architecture
+                      and Airflow orchestration reduced reporting turnaround from about 14 days to
+                      3–4 days.
+                    </p>
+                  </article>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section projects-section" id="projects" aria-labelledby="projects-title">
+        <div class="page-shell">
+          <header class="section-heading" data-reveal>
+            <p class="section-index">02 / SELECTED WORK</p>
+            <div>
+              <h2 id="projects-title">Architecture, not just a technology list.</h2>
+              <p>Open each case study to trace how data moves from source to decision.</p>
+            </div>
+          </header>
+
+          <div class="project-list">
+            <article class="project-card" data-reveal>
+              <div class="project-overview">
+                <div class="project-number" aria-hidden="true">01</div>
+                <div class="project-copy">
+                  <div class="project-heading-row">
+                    <p class="project-type">Applied AI · Matching</p>
+                    <span class="status-badge">Completed</span>
+                  </div>
+                  <h3>AI-Powered ATS Resume Matcher</h3>
+                  <p>
+                    An evidence-focused matching workflow that combines structured extraction,
+                    hybrid retrieval, and guarded LLM evaluation.
+                  </p>
+                  <div class="tag-row">
+                    <span>Gemini</span><span>RAG</span><span>BM25</span><span>Vector Search</span>
+                  </div>
+                </div>
+              </div>
+              <details data-project-details>
+                <summary>
+                  <span>View architecture</span>
+                  <span class="details-icon" aria-hidden="true">+</span>
+                </summary>
+                <div class="project-case-study">
+                  <dl class="case-study-grid">
+                    <div><dt>Problem</dt><dd>Resume matching needs traceable qualification evidence, not an unexplained score.</dd></div>
+                    <div><dt>Implementation</dt><dd>Parsed documents, extracted structured fields, and evaluated matches with schema validation, retries, fallbacks, and guardrails.</dd></div>
+                    <div><dt>Engineering decisions</dt><dd>Combined BM25 and vector retrieval, then required supporting evidence within weighted fit scoring.</dd></div>
+                    <div><dt>Outcome</dt><dd>Produced explainable resume-to-job fit results grounded in the supplied documents.</dd></div>
+                  </dl>
+                  <div class="architecture-block">
+                    <h4>Architecture</h4>
+                    <div class="architecture-flow" aria-label="ATS Resume Matcher architecture">
+                      <div class="architecture-node architecture-source"><span>Sources</span><strong>Resume + job description</strong></div>
+                      <div class="architecture-connector" aria-hidden="true">→</div>
+                      <div class="architecture-node"><span>Ingestion</span><strong>Document parsing</strong></div>
+                      <div class="architecture-connector" aria-hidden="true">→</div>
+                      <div class="architecture-node"><span>Processing</span><strong>Structured extraction</strong></div>
+                      <div class="architecture-connector" aria-hidden="true">→</div>
+                      <div class="architecture-node"><span>Retrieval</span><strong>BM25 + vector search</strong></div>
+                      <div class="architecture-connector" aria-hidden="true">→</div>
+                      <div class="architecture-node architecture-serve"><span>Serving</span><strong>Fit score + evidence</strong></div>
+                    </div>
+                  </div>
+                </div>
+              </details>
+            </article>
+
+            <article class="project-card" data-reveal>
+              <div class="project-overview">
+                <div class="project-number" aria-hidden="true">02</div>
+                <div class="project-copy">
+                  <div class="project-heading-row">
+                    <p class="project-type">Streaming · Logistics</p>
+                    <span class="status-badge">Completed</span>
+                  </div>
+                  <h3>Real-Time Delivery Monitoring &amp; Delay Detection</h3>
+                  <p>
+                    A streaming pipeline for turning GPS and delivery-status events into continuously
+                    refreshed operational signals.
+                  </p>
+                  <div class="tag-row"><span>Kafka</span><span>Snowflake</span><span>SQL</span></div>
+                </div>
+              </div>
+              <details data-project-details>
+                <summary>
+                  <span>View architecture</span>
+                  <span class="details-icon" aria-hidden="true">+</span>
+                </summary>
+                <div class="project-case-study">
+                  <dl class="case-study-grid">
+                    <div><dt>Problem</dt><dd>Delivery teams need timely visibility into route deviations and shipment delays.</dd></div>
+                    <div><dt>Implementation</dt><dd>Ingested GPS and delivery-status events with Kafka and transformed them in Snowflake using SQL.</dd></div>
+                    <div><dt>Engineering decisions</dt><dd>Used Snowflake Dynamic Tables to maintain deduplicated, continuously refreshed analytical results.</dd></div>
+                    <div><dt>Outcome</dt><dd>Supported near-real-time delay and route-deviation analytics for shipment monitoring.</dd></div>
+                  </dl>
+                  <div class="architecture-block">
+                    <h4>Architecture</h4>
+                    <div class="architecture-flow" aria-label="Delivery monitoring architecture">
+                      <div class="architecture-node architecture-source"><span>Sources</span><strong>GPS + status events</strong></div>
+                      <div class="architecture-connector" aria-hidden="true">→</div>
+                      <div class="architecture-node"><span>Ingestion</span><strong>Apache Kafka</strong></div>
+                      <div class="architecture-connector" aria-hidden="true">→</div>
+                      <div class="architecture-node"><span>Storage</span><strong>Snowflake</strong></div>
+                      <div class="architecture-connector" aria-hidden="true">→</div>
+                      <div class="architecture-node"><span>Processing</span><strong>Dynamic Tables + SQL</strong></div>
+                      <div class="architecture-connector" aria-hidden="true">→</div>
+                      <div class="architecture-node architecture-serve"><span>Serving</span><strong>Delay analytics</strong></div>
+                    </div>
+                  </div>
+                </div>
+              </details>
+            </article>
+
+            <article class="project-card" data-reveal>
+              <div class="project-overview">
+                <div class="project-number" aria-hidden="true">03</div>
+                <div class="project-copy">
+                  <div class="project-heading-row">
+                    <p class="project-type">Lakehouse · Inventory</p>
+                    <span class="status-badge">Completed</span>
+                  </div>
+                  <h3>Inventory Monitoring &amp; Replenishment Analytics</h3>
+                  <p>
+                    A governed Azure lakehouse path for converting supply-chain records into stock
+                    visibility and replenishment signals.
+                  </p>
+                  <div class="tag-row">
+                    <span>ADF</span><span>ADLS Gen2</span><span>Databricks</span><span>PySpark</span><span>Power BI</span>
+                  </div>
+                </div>
+              </div>
+              <details data-project-details>
+                <summary>
+                  <span>View architecture</span>
+                  <span class="details-icon" aria-hidden="true">+</span>
+                </summary>
+                <div class="project-case-study">
+                  <dl class="case-study-grid">
+                    <div><dt>Problem</dt><dd>Inventory teams needed reliable stock and reorder visibility beyond spreadsheet reporting.</dd></div>
+                    <div><dt>Implementation</dt><dd>Processed 100K+ supply-chain records through Bronze, Silver, and Gold Delta Lake layers with PySpark.</dd></div>
+                    <div><dt>Engineering decisions</dt><dd>Applied Unity Catalog for governance and exposed curated data through Databricks SQL and Power BI.</dd></div>
+                    <div><dt>Outcome</dt><dd>Delivered inventory visibility and automated reorder triggers from governed, curated data.</dd></div>
+                  </dl>
+                  <div class="architecture-block">
+                    <h4>Architecture</h4>
+                    <div class="architecture-flow" aria-label="Inventory analytics architecture">
+                      <div class="architecture-node architecture-source"><span>Sources</span><strong>Supply-chain records</strong></div>
+                      <div class="architecture-connector" aria-hidden="true">→</div>
+                      <div class="architecture-node"><span>Ingestion</span><strong>Azure Data Factory</strong></div>
+                      <div class="architecture-connector" aria-hidden="true">→</div>
+                      <div class="architecture-node"><span>Storage</span><strong>ADLS Gen2 · Bronze</strong></div>
+                      <div class="architecture-connector" aria-hidden="true">→</div>
+                      <div class="architecture-node"><span>Processing</span><strong>Databricks · Silver/Gold</strong></div>
+                      <div class="architecture-connector" aria-hidden="true">→</div>
+                      <div class="architecture-node architecture-serve"><span>Serving</span><strong>SQL + Power BI</strong></div>
+                    </div>
+                    <p class="architecture-note"><span aria-hidden="true">◇</span> Governance: Unity Catalog</p>
+                  </div>
+                </div>
+              </details>
+            </article>
+
+            <article class="project-card" data-reveal>
+              <div class="project-overview">
+                <div class="project-number" aria-hidden="true">04</div>
+                <div class="project-copy">
+                  <div class="project-heading-row">
+                    <p class="project-type">Agentic AI · Finance</p>
+                    <span class="status-badge">Completed</span>
+                  </div>
+                  <h3>Financial Intelligence Hub</h3>
+                  <p>
+                    A multi-tool agent and retrieval workflow that brings market signals, technical
+                    indicators, contextual research, and portfolio activity into one interface.
+                  </p>
+                  <div class="tag-row">
+                    <span>LangChain</span><span>ChromaDB</span><span>Gemini Flash</span><span>Streamlit</span>
+                  </div>
+                </div>
+              </div>
+              <details data-project-details>
+                <summary>
+                  <span>View architecture</span>
+                  <span class="details-icon" aria-hidden="true">+</span>
+                </summary>
+                <div class="project-case-study">
+                  <dl class="case-study-grid">
+                    <div><dt>Problem</dt><dd>Market data, technical indicators, contextual research, and portfolio activity sat in separate workflows.</dd></div>
+                    <div><dt>Implementation</dt><dd>Built a LangChain ReAct agent for stock data, indicators, and trade actions, plus a RAG path for S&amp;P 500 context.</dd></div>
+                    <div><dt>Engineering decisions</dt><dd>Used ChromaDB with Google Generative AI embeddings and Gemini Flash for contextual analysis.</dd></div>
+                    <div><dt>Outcome</dt><dd>Delivered a Streamlit portfolio dashboard with market context, live P&amp;L, and trade history.</dd></div>
+                  </dl>
+                  <div class="architecture-block">
+                    <h4>Architecture</h4>
+                    <div class="architecture-flow" aria-label="Financial Intelligence Hub architecture">
+                      <div class="architecture-node architecture-source"><span>Sources</span><strong>Market data + S&amp;P context</strong></div>
+                      <div class="architecture-connector" aria-hidden="true">→</div>
+                      <div class="architecture-node"><span>Tools</span><strong>LangChain ReAct</strong></div>
+                      <div class="architecture-connector" aria-hidden="true">→</div>
+                      <div class="architecture-node"><span>Processing</span><strong>Gemini Flash</strong></div>
+                      <div class="architecture-connector" aria-hidden="true">→</div>
+                      <div class="architecture-node"><span>Retrieval</span><strong>ChromaDB</strong></div>
+                      <div class="architecture-connector" aria-hidden="true">→</div>
+                      <div class="architecture-node architecture-serve"><span>Serving</span><strong>Streamlit dashboard</strong></div>
+                    </div>
+                  </div>
+                </div>
+              </details>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="stack" aria-labelledby="stack-title">
+        <div class="page-shell">
+          <header class="section-heading" data-reveal>
+            <p class="section-index">03 / TECHNICAL STACK</p>
+            <div>
+              <h2 id="stack-title">Tools connected to delivered work.</h2>
+              <p>Grouped by the role each technology plays across pipelines, platforms, and analysis.</p>
+            </div>
+          </header>
+
+          <div class="skills-grid">
+            <article class="skill-group" data-reveal><p>01</p><h3>Programming</h3><ul><li>Python</li><li>SQL</li><li>PL/SQL</li></ul></article>
+            <article class="skill-group" data-reveal><p>02</p><h3>Data Engineering</h3><ul><li>ETL/ELT</li><li>Databricks</li><li>dbt</li><li>Airflow</li><li>Spark</li><li>Kafka</li><li>ADF</li></ul></article>
+            <article class="skill-group" data-reveal><p>03</p><h3>Data Warehousing</h3><ul><li>PostgreSQL</li><li>Snowflake</li><li>BigQuery</li><li>Redshift</li><li>Synapse</li></ul></article>
+            <article class="skill-group" data-reveal><p>04</p><h3>Data Modeling</h3><ul><li>Dimensional Modeling</li><li>Medallion Architecture</li><li>ER Diagrams</li></ul></article>
+            <article class="skill-group" data-reveal><p>05</p><h3>Cloud Platforms</h3><ul><li>AWS</li><li>Azure</li><li>GCP</li></ul></article>
+            <article class="skill-group" data-reveal><p>06</p><h3>Visualization</h3><ul><li>Tableau</li><li>Power BI</li><li>Looker Studio</li></ul></article>
+            <article class="skill-group" data-reveal><p>07</p><h3>Applied AI</h3><ul><li>LangChain</li><li>RAG Pipelines</li><li>LLM Integration</li><li>Vector Databases</li><li>AI Harness</li><li>Evals</li></ul></article>
+            <article class="skill-group" data-reveal><p>08</p><h3>Development Tools</h3><ul><li>Git</li><li>GitHub</li><li>Docker</li><li>Agile</li><li>Scrum</li><li>Jira</li></ul></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section credentials-section" id="education" aria-labelledby="education-title">
+        <div class="page-shell">
+          <header class="section-heading" data-reveal>
+            <p class="section-index">04 / CREDENTIALS</p>
+            <div>
+              <h2 id="education-title">Academic foundation and verified learning.</h2>
+              <p>Data science, engineering, and platform-focused credentials.</p>
+            </div>
+          </header>
+
+          <div class="credentials-grid">
+            <div class="education-list" data-reveal>
+              <article>
+                <p class="credential-date">Aug 2024 – May 2026</p>
+                <h3>Indiana University Bloomington</h3>
+                <p>M.S. Data Science</p>
+              </article>
+              <article>
+                <p class="credential-date">Jun 2019 – May 2023</p>
+                <h3>New Horizon College of Engineering</h3>
+                <p>B.E. Electronics and Communications Engineering</p>
+              </article>
+            </div>
+
+            <div class="certification-list" data-reveal>
+              <a
+                href="https://learn.microsoft.com/api/credentials/share/en-us/supreethgv-9568/FAC16C7959F10ABD?sharingId"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>Microsoft Azure</span>
+                <strong>Azure Databricks Data Engineer Associate</strong>
+                <i aria-hidden="true">↗</i>
+              </a>
+              <a
+                href="https://www.coursera.org/account/accomplishments/specialization/MMX9RW2T9784"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>Snowflake</span>
+                <strong>Snowflake Data Engineering Professional</strong>
+                <i aria-hidden="true">↗</i>
+              </a>
+              <a
+                href="https://www.coursera.org/account/accomplishments/specialization/RJC3O1Z7STGR"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>IBM</span>
+                <strong>RAG and Agentic AI</strong>
+                <i aria-hidden="true">↗</i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact-section" id="contact" aria-labelledby="contact-title">
+        <div class="page-shell contact-grid">
+          <div data-reveal>
+            <p class="section-index">05 / CONTACT</p>
+            <h2 id="contact-title">Let’s build data systems people can trust.</h2>
+          </div>
+          <div class="contact-copy" data-reveal>
+            <p>
+              I’m interested in data engineering work spanning reliable pipelines, cloud data
+              platforms, Databricks, warehousing, and applied AI.
+            </p>
+            <a class="contact-email" href="mailto:supreethgvvs@gmail.com">
+              supreethgvvs@gmail.com <span aria-hidden="true">↗</span>
+            </a>
+            <div class="contact-actions">
+              <a
+                href="https://www.linkedin.com/in/supreeth-gunniguntla-vidyasagar-331610217/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >LinkedIn</a>
+              <a
+                href="https://github.com/GVSupreeth"
+                target="_blank"
+                rel="noopener noreferrer"
+              >GitHub</a>
+              <a
+                href="./assets/resume/Supreeth_Gunniguntla_Vidyasagar_Resume.docx"
+                download
+              >Download résumé</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="page-shell">
+        <p><span aria-hidden="true">●</span> Static system · GitHub Pages compatible</p>
+        <p>Designed around verified evidence, accessible interaction, and progressive enhancement.</p>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </footer>
+  </body>
 </html>
