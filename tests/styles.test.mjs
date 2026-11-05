@@ -58,6 +58,18 @@ test('portfolio components share a coherent lineage system', () => {
   assert.match(css, /details\s*>\s*summary\s*\{/i);
 });
 
+test('hero portrait card has polished cropping and a compact mobile layout', () => {
+  const css = loadStyles();
+
+  assert.match(css, /\.hero-identity\s*\{/i);
+  assert.match(css, /\.profile-card\s*\{[^}]*border-radius:[^}]*box-shadow:/is);
+  assert.match(css, /\.profile-headshot\s*\{[^}]*object-fit:\s*cover/is);
+  assert.match(
+    css,
+    /@media\s*\(max-width:\s*480px\)[\s\S]*?\.hero-identity\s*\{[^}]*grid-template-columns:/is,
+  );
+});
+
 test('tablet and mobile rules stack the layout and preserve input usability', () => {
   const css = loadStyles();
 

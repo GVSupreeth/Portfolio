@@ -373,6 +373,50 @@ ul {
   gap: clamp(3rem, 8vw, 7rem);
 }
 
+.hero-identity {
+  display: grid;
+  grid-template-columns: 9.25rem minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(1.25rem, 3vw, 2rem);
+  margin-block-end: 1.5rem;
+}
+
+.hero-identity-copy {
+  min-width: 0;
+}
+
+.profile-card {
+  position: relative;
+  width: 9.25rem;
+  aspect-ratio: 4 / 5;
+  margin: 0;
+  padding: 0.32rem;
+  overflow: hidden;
+  border: 1px solid rgba(94, 231, 247, 0.3);
+  border-radius: 1.35rem;
+  background: linear-gradient(145deg, rgba(94, 231, 247, 0.13), rgba(16, 21, 29, 0.96));
+  box-shadow:
+    0 1.5rem 3.75rem rgba(0, 0, 0, 0.34),
+    0 0 0 1px rgba(244, 247, 250, 0.035) inset;
+}
+
+.profile-card::after {
+  position: absolute;
+  inset: auto 1rem 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-signal), transparent);
+  content: "";
+  opacity: 0.72;
+}
+
+.profile-headshot {
+  width: 100%;
+  height: 100%;
+  border-radius: 1.05rem;
+  object-fit: cover;
+  object-position: center 32%;
+}
+
 .system-label,
 .section-index,
 .story-label,
@@ -399,6 +443,10 @@ ul {
   margin-block-start: 1.5rem;
   color: var(--color-text-soft);
   font: 500 clamp(0.9rem, 1.4vw, 1.05rem)/1.4 var(--font-mono);
+}
+
+.hero-identity .hero-name {
+  margin-block-start: 0.8rem;
 }
 
 .hero h1 {
@@ -1588,6 +1636,30 @@ details[open] .details-icon {
 
 @media (max-width: 480px) {
   .brand-copy strong {
+    font-size: 0.78rem;
+  }
+
+  .hero-identity {
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+    gap: 1rem;
+    margin-block-end: 1.75rem;
+  }
+
+  .profile-card {
+    width: 6.5rem;
+    border-radius: 1rem;
+  }
+
+  .profile-headshot {
+    border-radius: 0.75rem;
+  }
+
+  .hero-identity .system-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+  }
+
+  .hero-identity .hero-name {
     font-size: 0.78rem;
   }
 

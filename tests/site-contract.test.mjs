@@ -60,6 +60,26 @@ test('hero communicates the recruiter essentials without JavaScript', () => {
   }
 });
 
+test('hero includes the supplied professional headshot with accessible image metadata', () => {
+  const hero = html.match(/<section\b[^>]*class="[^"]*hero[^"]*"[\s\S]*?<\/section>/i)?.[0];
+  assert.ok(hero, 'hero section must exist');
+
+  const image = hero.match(/<img\b[^>]*class="profile-headshot"[^>]*>/i)?.[0];
+  assert.ok(image, 'hero must include the profile headshot');
+  assert.match(image, /src="\.\/assets\/images\/profile-headshot\.png"/i);
+  assert.match(
+    image,
+    /alt="Professional headshot of Supreeth Gunniguntla Vidyasagar"/i,
+  );
+  assert.match(image, /width="1254"/i);
+  assert.match(image, /height="1254"/i);
+
+  const assetPath = join(root, 'assets/images/profile-headshot.png');
+  assert.ok(existsSync(assetPath), 'profile headshot asset must exist');
+  const signature = readFileSync(assetPath).subarray(0, 8);
+  assert.deepEqual([...signature], [137, 80, 78, 71, 13, 10, 26, 10]);
+});
+
 test('verified evidence and experience are present in static HTML', () => {
   for (const evidence of ['16M+', '70K+', '3K+', '100K+']) {
     assert.ok(html.includes(evidence), `missing evidence ${evidence}`);

@@ -42,6 +42,8 @@ The selected concept is **Data Lineage Console**: an original, permanently dark 
 
 Direct user clarification on 2026-11-05 confirms that dbt was used in the Antern Technologies pipeline. This verified correction supplements the résumé where that tool attribution was omitted.
 
+Direct user request on 2026-11-05 supplies a professional headshot and adds a compact portrait card to the hero. The portrait supports personal recognition without turning the composition into the reference site's portrait-led treatment.
+
 Website copy must not reproduce résumé bullets verbatim throughout the page. Reframe supported facts into concise recruiter-friendly narratives organized around the business or research problem, Supreeth's technical contribution, the technologies used, and the measurable result, without changing the claim's meaning or strength.
 
 The repository currently contains one production file, `index.html`, with all markup, styling, content, and JavaScript inline. The tracked `Supreeth_2.pdf` is deleted in the working tree. The newer résumé exists as DOCX outside the repository. The implementation must not overwrite or disguise this state: it will package the newer résumé as the download asset unless a matching current PDF becomes available.
@@ -70,7 +72,7 @@ A sticky, translucent navigation bar contains the SG monogram, concise links to 
 
 ### Hero: identity plus functional terminal
 
-The hero is asymmetric but does not use a portrait. The primary column states Supreeth's name, role, and concise positioning around reliable data systems across cloud, Databricks, and applied AI. Primary actions lead to selected work and the résumé; GitHub and LinkedIn are immediately available.
+The hero is asymmetric and pairs Supreeth's name, role, and concise positioning with a compact professional portrait card. The headshot sits inside the primary identity block, while the functional terminal remains the companion panel. Primary actions lead to selected work and the résumé; GitHub and LinkedIn are immediately available.
 
 The professional introduction is the primary recruiter path and must communicate the essential positioning without interaction. The terminal is a secondary, complementary proof of craft; it must never be required to discover Supreeth's role, strongest evidence, projects, résumé, or contact links.
 
@@ -167,6 +169,7 @@ Close with a concise invitation to discuss data-platform work. Provide verified 
 - Permanent dark palette with deep graphite and blue-black surfaces, off-white body text, muted blue-gray secondary text, electric cyan as the main signal color, and warm amber as a sparse counter-accent.
 - Typography pairs a clean sans-serif for narrative content with a mono face for labels, commands, dates, and architecture nodes. Fonts use performant fallbacks and `font-display` behavior; the page remains legible if remote fonts fail.
 - Data-lineage motifs use thin rails, nodes, dashed paths, and subtle packet pulses. The hero background is an original SVG/CSS topology field, not the reference's particle field or portrait arch.
+- The supplied headshot uses a restrained rounded-corner card, subtle border and shadow, descriptive alternative text, and a responsive crop that preserves facial framing.
 - Cards use clear borders and surface contrast rather than heavy glass blur. Glow appears only on focus, active terminal input, and selected lineage nodes.
 - Motion is brief and purposeful: reveal transitions, terminal typing, topology pulses, project expansion, and active navigation. All animations stop or simplify for `prefers-reduced-motion`.
 
@@ -187,7 +190,7 @@ No dependency installation or compilation is required. JavaScript modules must f
 
 - Desktop: split hero, sticky navigation, horizontal evidence strip, generous timeline rail, and architecture flows laid out left-to-right.
 - Tablet: narrower split hero, wrapping evidence items, and compressed timeline metadata.
-- Mobile: single-column hero, terminal below copy, accessible menu, stacked evidence, timeline rail at the edge, and architecture flows stacked vertically.
+- Mobile: single-column hero, compact portrait-and-identity row above the headline, terminal below copy, accessible menu, stacked evidence, timeline rail at the edge, and architecture flows stacked vertically.
 - Minimum interactive target size is 44px where practical. Body copy remains at least 16px on small screens, and terminal inputs avoid iOS zoom.
 
 ## Accessibility, performance, and SEO
