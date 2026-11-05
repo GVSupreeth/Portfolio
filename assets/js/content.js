@@ -73,7 +73,7 @@ export const EXPERIENCE_SUMMARIES = Object.freeze([
       esg:
         'Delivered 260+ PostgreSQL development tasks for an ESG regulatory SaaS platform supporting data acquisition, CRUD workflows, and SEBI BRSR reporting; indexing and query optimization improved SQL execution and application performance by approximately 70%.',
       banking:
-        'Helped consolidate 16M+ customer records from three banking source systems into an on-premises PostgreSQL warehouse; dbt transformations and Airflow orchestration reduced reporting turnaround from approximately 14 days to 3–4 days.',
+        'Helped consolidate 16M+ customer records from three banking source systems into an on-premises PostgreSQL warehouse supporting 35+ internal and RBI regulatory reports. SQL-based ETL transformations built with dbt in a Bronze–Silver–Gold Medallion Architecture and orchestrated with Apache Airflow reduced internal reporting turnaround from approximately 14 days to 3–4 hours.',
     },
   },
 ]);

@@ -105,6 +105,25 @@ test('verified evidence and experience are present in static HTML', () => {
   assert.match(anternEntry, /\bdbt\b/i);
 });
 
+test('banking warehouse outcome limits the 3–4 hour metric to internal reporting', () => {
+  const bankingStory = html.match(
+    /<article>\s*<p class="story-label">02 \/ Banking Data Warehouse<\/p>[\s\S]*?<\/article>/i,
+  )?.[0];
+  assert.ok(bankingStory, 'Banking Data Warehouse story must exist');
+  assert.match(bankingStory, /35\+ internal and RBI regulatory reports/i);
+  assert.match(bankingStory, /Bronze–Silver–Gold Medallion Architecture/i);
+  assert.match(bankingStory, /Apache Airflow/i);
+
+  const outcome = bankingStory.match(
+    /<p class="outcome-line">([\s\S]*?)<\/p>/i,
+  )?.[1];
+  assert.ok(outcome, 'Banking Data Warehouse outcome must exist');
+  assert.match(outcome, /internal reporting turnaround/i);
+  assert.match(outcome, /approximately 14 days to 3–4 hours/i);
+  assert.doesNotMatch(outcome, /RBI/i);
+  assert.doesNotMatch(bankingStory, /3–4 days/i);
+});
+
 test('all project case studies and architecture summaries work without JavaScript', () => {
   for (const project of [
     'AI-Powered ATS Resume Matcher',

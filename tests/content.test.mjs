@@ -80,7 +80,10 @@ test('experience uses exact resume titles, organizations, and dates', async () =
   assert.ok(ey.stories.esg.includes('260+'));
   assert.ok(ey.stories.esg.includes('SEBI BRSR'));
   assert.ok(ey.stories.banking.includes('16M+'));
-  assert.ok(ey.stories.banking.includes('3–4 days'));
+  assert.ok(ey.stories.banking.includes('35+ internal and RBI regulatory reports'));
+  assert.ok(ey.stories.banking.includes('internal reporting turnaround'));
+  assert.ok(ey.stories.banking.includes('3–4 hours'));
+  assert.ok(!ey.stories.banking.includes('3–4 days'));
 
   const antern = EXPERIENCE_SUMMARIES.find(
     ({ organization }) => organization === 'Antern Technologies',

@@ -44,6 +44,8 @@ Direct user clarification on 2026-11-05 confirms that dbt was used in the Antern
 
 Direct user request on 2026-11-05 supplies a professional headshot and adds a compact portrait card to the hero. The portrait supports personal recognition without turning the composition into the reference site's portrait-led treatment.
 
+Direct user correction on 2026-11-05 revises the EY Banking Data Warehouse outcome: SQL-based dbt ETL in a Bronze–Silver–Gold Medallion Architecture, orchestrated with Apache Airflow, reduced internal reporting turnaround from approximately 14 days to 3–4 hours. The metric does not apply to RBI regulatory report generation or submission.
+
 Website copy must not reproduce résumé bullets verbatim throughout the page. Reframe supported facts into concise recruiter-friendly narratives organized around the business or research problem, Supreeth's technical contribution, the technologies used, and the measurable result, without changing the claim's meaning or strength.
 
 The repository currently contains one production file, `index.html`, with all markup, styling, content, and JavaScript inline. The tracked `Supreeth_2.pdf` is deleted in the working tree. The newer résumé exists as DOCX outside the repository. The implementation must not overwrite or disguise this state: it will package the newer résumé as the download asset unless a matching current PDF becomes available.
@@ -122,7 +124,7 @@ Present roles in reverse chronology with a continuous lineage rail and expandabl
 Show two clearly labeled engineering stories inside the EY entry:
 
 1. **ESG Regulatory SaaS** — 260+ PostgreSQL database tasks supporting acquisition, CRUD operations, and SEBI BRSR reporting; stored procedures, functions, triggers, ER modeling, role-based access control, audit triggers, and roughly 70% improvement to SQL query execution and application performance through indexing and query/table optimization.
-2. **Banking Data Warehouse** — integration of 16M+ customer records from three banking source systems into an on-premises PostgreSQL warehouse supporting 35+ internal and RBI regulatory reports; data profiling, source-to-target mapping, dimensional modeling, dbt transformations in a Bronze–Silver–Gold architecture, and Airflow orchestration that reduced reporting turnaround from roughly 14 days to 3–4 days.
+2. **Banking Data Warehouse** — integration of 16M+ customer records from three banking source systems into an on-premises PostgreSQL warehouse supporting 35+ internal and RBI regulatory reports; data profiling, source-to-target mapping, and dimensional modeling; SQL-based ETL transformations built with dbt in a Bronze–Silver–Gold Medallion Architecture and orchestrated with Apache Airflow, reducing internal reporting turnaround from approximately 14 days to 3–4 hours. Do not apply the 3–4-hour metric to RBI regulatory report generation or submission.
 
 Unsupported current-site claims such as 140 stored procedures, 43 ER models, 50% debugging reduction, SCD Type 2 ownership, or legal-exposure reduction are omitted.
 
