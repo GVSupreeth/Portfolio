@@ -77,6 +77,12 @@ test('verified evidence and experience are present in static HTML', () => {
   ]) {
     assert.ok(html.includes(role), `missing experience content: ${role}`);
   }
+
+  const anternEntry = html.match(
+    /<article\b[^>]*class="experience-entry"[\s\S]*?Antern Technologies[\s\S]*?<\/article>/i,
+  )?.[0];
+  assert.ok(anternEntry, 'Antern experience entry must exist');
+  assert.doesNotMatch(anternEntry, /\bdbt\b/i);
 });
 
 test('all project case studies and architecture summaries work without JavaScript', () => {

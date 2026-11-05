@@ -81,6 +81,12 @@ test('experience uses exact resume titles, organizations, and dates', async () =
   assert.ok(ey.stories.esg.includes('SEBI BRSR'));
   assert.ok(ey.stories.banking.includes('16M+'));
   assert.ok(ey.stories.banking.includes('3–4 days'));
+
+  const antern = EXPERIENCE_SUMMARIES.find(
+    ({ organization }) => organization === 'Antern Technologies',
+  );
+  assert.ok(!antern.stack.includes('dbt'), 'Antern stack must not add resume-unsupported dbt');
+  assert.ok(!JSON.stringify(antern).toLowerCase().includes('dbt'));
 });
 
 test('projects use supported stacks, completed status, and no guessed links', async () => {

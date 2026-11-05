@@ -159,3 +159,25 @@ test('project disclosure labels describe the next action', async () => {
   details.dispatch('toggle');
   assert.equal(label.textContent, 'View architecture');
 });
+
+test('print lifecycle expands disclosures and restores their previous state', async () => {
+  const { initPrintDetails } = await loadMain();
+  const first = { open: false };
+  const second = { open: true };
+  const listeners = new Map();
+  const doc = { querySelectorAll: () => [first, second] };
+  const win = {
+    addEventListener(type, listener) {
+      listeners.set(type, listener);
+    },
+  };
+
+  initPrintDetails(doc, win);
+  listeners.get('beforeprint')();
+  assert.equal(first.open, true);
+  assert.equal(second.open, true);
+
+  listeners.get('afterprint')();
+  assert.equal(first.open, false);
+  assert.equal(second.open, true);
+});

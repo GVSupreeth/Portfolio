@@ -166,9 +166,31 @@ export function initDetailsLabels(doc = globalThis.document) {
   });
 }
 
+export function initPrintDetails(doc = globalThis.document, win = globalThis.window) {
+  const detailsElements = [...(doc?.querySelectorAll?.('details') ?? [])];
+  if (!detailsElements.length || !win?.addEventListener) return;
+
+  let previousState = [];
+  win.addEventListener('beforeprint', () => {
+    previousState = detailsElements.map((details) => details.open);
+    detailsElements.forEach((details) => {
+      details.open = true;
+    });
+  });
+
+  win.addEventListener('afterprint', () => {
+    detailsElements.forEach((details, index) => {
+      details.open = previousState[index] ?? false;
+    });
+  });
+}
+
 function navigateTo(target, doc, win) {
   const section = doc?.querySelector?.(target);
   if (!section) return;
+
+  if (!section.hasAttribute('tabindex')) section.setAttribute('tabindex', '-1');
+  section.focus({ preventScroll: true });
 
   section.scrollIntoView({
     behavior: prefersReducedMotion(win) ? 'auto' : 'smooth',
@@ -209,6 +231,7 @@ export function initPage(doc = globalThis.document, win = globalThis.window) {
   initActiveNavigation(doc, win);
   initReveal(doc, win);
   initDetailsLabels(doc);
+  initPrintDetails(doc, win);
   initTerminalExperience(doc, win);
 }
 

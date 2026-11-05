@@ -597,11 +597,16 @@ ul {
   width: 100%;
   min-block-size: 44px;
   border: 0;
-  outline: 0;
   background: transparent;
   color: var(--color-text);
   caret-color: var(--color-signal);
   font: inherit;
+}
+
+.terminal-form input:focus {
+  border-radius: 0.25rem;
+  outline: 2px solid var(--color-signal);
+  outline-offset: 4px;
 }
 
 .terminal-form input::placeholder {
@@ -1664,6 +1669,12 @@ details[open] .details-icon {
     background: #ffffff;
     color: #111111;
     font-size: 10pt;
+  }
+
+  .js [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 
   .site-header,

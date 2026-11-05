@@ -67,6 +67,8 @@ function waitFor(method) {
 await send('Page.enable');
 await send('Runtime.enable');
 await send('Log.enable');
+await send('Network.enable');
+await send('Network.setCacheDisabled', { cacheDisabled: true });
 await send('Emulation.setDeviceMetricsOverride', {
   width: viewportWidth,
   height: viewportHeight,
@@ -199,6 +201,26 @@ assert.deepEqual(interactions.detailLabels, Array(4).fill('Hide architecture'));
 assert.equal(interactions.summaryFocusable, true, 'project disclosures must be keyboard focusable');
 assert.equal(interactions.resumeDownload, true, 'latest resume must remain downloadable');
 
+await send('Page.bringToFront');
+const terminalFocus = await send('Runtime.evaluate', {
+  expression: `(() => {
+    const input = document.querySelector('#terminal-input');
+    input.focus();
+    const style = getComputedStyle(input);
+    return {
+      activeId: document.activeElement?.id ?? '',
+      matchesFocus: input.matches(':focus'),
+      outlineStyle: style.outlineStyle,
+      outlineWidth: style.outlineWidth,
+    };
+  })()`,
+  returnByValue: true,
+});
+assert.equal(terminalFocus.result.value.activeId, 'terminal-input');
+assert.equal(terminalFocus.result.value.matchesFocus, true);
+assert.notEqual(terminalFocus.result.value.outlineStyle, 'none');
+assert.notEqual(terminalFocus.result.value.outlineWidth, '0px');
+
 await send('Emulation.setEmulatedMedia', {
   features: [{ name: 'prefers-reduced-motion', value: 'reduce' }],
 });
@@ -211,12 +233,63 @@ const reducedMotion = await send('Runtime.evaluate', {
 });
 assert.equal(reducedMotion.result.value.matches, true);
 assert.notEqual(reducedMotion.result.value.duration, '2.4s');
+
+const reducedNavigation = await send('Runtime.evaluate', {
+  expression: `new Promise((resolve) => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    document.querySelector('[data-command="projects"]').click();
+    setTimeout(() => {
+      resolve({
+        projectTop: document.querySelector('#projects').getBoundingClientRect().top,
+        activeId: document.activeElement?.id ?? '',
+        scrollY: window.scrollY
+      });
+    }, 80);
+  })`,
+  awaitPromise: true,
+  returnByValue: true,
+});
+assert.equal(reducedNavigation.result.value.activeId, 'projects');
+assert.ok(
+  Math.abs(reducedNavigation.result.value.projectTop) < 120,
+  `reduced-motion navigation must reach Projects, top=${reducedNavigation.result.value.projectTop}`,
+);
+
+await send('Emulation.setEmulatedMedia', { media: 'print', features: [] });
+const printEvaluation = await send('Runtime.evaluate', {
+  expression: `new Promise((resolve) => {
+    const details = [...document.querySelectorAll('details')];
+    details.forEach((item) => { item.open = false; });
+    document.querySelectorAll('[data-reveal]').forEach((item) => item.classList.remove('is-visible'));
+    window.dispatchEvent(new Event('beforeprint'));
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      const opacity = getComputedStyle(document.querySelector('#experience [data-reveal]')).opacity;
+      const caseHeight = document.querySelector('.project-case-study').getBoundingClientRect().height;
+      const expandedForPrint = details.every((item) => item.open);
+      window.dispatchEvent(new Event('afterprint'));
+      resolve({
+        opacity,
+        caseHeight,
+        expandedForPrint,
+        restoredClosed: details.every((item) => !item.open)
+      });
+    }));
+  })`,
+  awaitPromise: true,
+  returnByValue: true,
+});
+assert.equal(printEvaluation.result.value.opacity, '1');
+assert.ok(printEvaluation.result.value.caseHeight > 100, 'print must include project case-study bodies');
+assert.equal(printEvaluation.result.value.expandedForPrint, true);
+assert.equal(printEvaluation.result.value.restoredClosed, true);
 assert.deepEqual(browserErrors, [], 'browser console must have no runtime errors');
 
 console.log(JSON.stringify({
   viewport: [viewportWidth, viewportHeight],
   interactions: 'pass',
   reducedMotion: reducedMotion.result.value,
+  reducedNavigation: reducedNavigation.result.value,
+  print: printEvaluation.result.value,
   browserErrors,
 }));
 

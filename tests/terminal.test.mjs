@@ -93,3 +93,18 @@ test('empty and unknown input return safe guidance', async () => {
   assert.equal(unknown.html, undefined);
   assert.equal(unknown.trustedHtml, undefined);
 });
+
+test('inherited object property names remain safe unknown commands', async () => {
+  const { resolveCommand } = await loadTerminal();
+
+  for (const input of ['constructor', '__proto__', 'toString']) {
+    const result = resolveCommand(input);
+    assert.equal(result.kind, 'print');
+    assert.deepEqual(result.lines, [
+      `Command not found: ${input}`,
+      'Type help to list available commands.',
+    ]);
+  }
+
+  assert.match(resolveCommand('help').lines.join(' '), /Available commands/);
+});

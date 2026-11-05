@@ -66,7 +66,10 @@ export function resolveCommand(raw = '') {
     };
   }
 
-  const resolver = commandResolvers[input.toLowerCase()];
+  const command = input.toLowerCase();
+  const resolver = Object.hasOwn(commandResolvers, command)
+    ? commandResolvers[command]
+    : null;
   if (resolver) return resolver();
 
   return {
@@ -113,29 +116,30 @@ export function initTerminal(root, options = {}) {
     const result = resolveCommand(raw);
     if (result.kind === 'clear') {
       output.replaceChildren();
-      return;
+      return result;
     }
 
-    const lineClass = entered && !commandResolvers[entered.toLowerCase()]
+    const lineClass = entered && !Object.hasOwn(commandResolvers, entered.toLowerCase())
       ? 'terminal-error'
       : '';
     result.lines.forEach((line) => appendLine(line, lineClass));
 
     if (result.kind === 'navigate') onNavigate(result.target);
     if (result.kind === 'open') onOpen(result.url);
+    return result;
   };
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
-    run(input.value);
+    const result = run(input.value);
     input.value = '';
-    input.focus();
+    if (result.kind !== 'navigate') input.focus();
   });
 
   suggestions.forEach((button) => {
     button.addEventListener('click', () => {
-      run(button.dataset.command ?? '');
-      input.focus();
+      const result = run(button.dataset.command ?? '');
+      if (result.kind !== 'navigate') input.focus();
     });
   });
 
